@@ -5,8 +5,6 @@ let formData = {
 
 const formElem = document.querySelector('.feedback-form');
 
-// const feedbackFromState = 'formData';
-
 formElem.addEventListener('input', e => {
     const email = e.currentTarget.elements.email.value;
     const message = e.currentTarget.elements.message.value;
