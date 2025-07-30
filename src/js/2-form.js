@@ -1,9 +1,18 @@
+document.addEventListener('DOMContentLoaded', () => {
+  
+const formElem = document.querySelector('.feedback-form');
+
 let formData = {
     email: '',
     message: '',
 };
 
-const formElem = document.querySelector('.feedback-form');
+const lsData = getFromLS('feedbackFromState');
+  if(lsData && typeof lsData === 'object') {
+    formData = lsData;
+    formElem.elements.email.value = lsData.email || '';
+    formElem.elements.message.value = lsData.message || '';
+  }
 
 formElem.addEventListener('input', e => {
     const email = e.currentTarget.elements.email.value;
@@ -14,16 +23,6 @@ formElem.addEventListener('input', e => {
 
     saveToLS('feedbackFromState', formData);
 });
-
-document.addEventListener('DOMContentLoaded', () => {
-  const lsData = getFromLS('feedbackFromState');
-  try {
-    formData = lsData;
-    formElem.elements.email.value = lsData.email || '';
-    formElem.elements.message.value = lsData.message || '';
-  } catch {}
-});
-
 
 formElem.addEventListener('submit', e => {
     e.preventDefault();
@@ -37,13 +36,12 @@ formElem.addEventListener('submit', e => {
             formData.email = emailValue;
             formData.message = messageValue;
             saveToLS('feedbackFromState', formData);
-        };
+    };
         
     console.dir(formData);
     localStorage.removeItem('feedbackFromState');
     formElem.reset();
 });
-
 
 function saveToLS(key, value) {
   const jsonData = JSON.stringify(value);
@@ -59,3 +57,5 @@ function getFromLS(key, defaultValue) {
     return defaultValue || jsonData;
   }
 }
+
+});
