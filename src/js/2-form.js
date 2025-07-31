@@ -31,16 +31,23 @@ formElem.addEventListener('submit', e => {
     const messageValue = formElem.elements.message.value.trim();
     
     if(emailValue === '' || messageValue === '') {
-        alert('Fill please all fields');
-    }else {
-            formData.email = emailValue;
-            formData.message = messageValue;
-            saveToLS('feedbackFromState', formData);
-    };
+      alert('Fill please all fields');
+      return;
+    }
+    
+    formData.email = emailValue;
+    formData.message = messageValue;
+    saveToLS('feedbackFromState', formData);
+    
         
     console.dir(formData);
     localStorage.removeItem('feedbackFromState');
     formElem.reset();
+
+    formData = {
+      email: '',
+      message: '',
+    };
 });
 
 function saveToLS(key, value) {

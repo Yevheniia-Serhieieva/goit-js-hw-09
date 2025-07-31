@@ -96,4 +96,4 @@ captionsData: 'alt',
 captionDelay: 250,
 });
 
-gallery.on('show.simplelightbox');
+
